@@ -1,2 +1,2 @@
 # api-praca
-Api do sistema da Praça
+Api do sistema da Praça das Profissões

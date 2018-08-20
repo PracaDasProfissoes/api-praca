@@ -1,0 +1,22 @@
+{
+  "name": "praca-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.16.3",
+    "joi": "^13.2.0",
+    "lodash": "^4.17.10",
+    "mongoose": "^5.0.17",
+    "morgan": "^1.9.0",
+    "node-cnpj": "^1.0.8",
+    "node-cpf": "^1.0.20"
+  }
+}
