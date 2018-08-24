@@ -11,4 +11,6 @@ module.exports = function (app) {
     app.put('/api/schools/:id', schoolCtrl.update)
 
     app.delete('/api/schools/:id', schoolCtrl.remove)
+
+  
 }

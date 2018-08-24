@@ -11,7 +11,7 @@ const Student = mongoose.model('Student',mongoose.Schema({
         required:true
     },
     age: {
-        type: int,
+        type: Number,
         required:true
     },
     course: {

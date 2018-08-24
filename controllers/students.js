@@ -3,8 +3,8 @@ const _ = require('lodash')
 
 function _list (req,res,next ){
     Student.find()
-    .then(students => {res.send(students)})
-    .catch(err => next(err))
+        .then(students => {res.send(students)})
+        .catch(err => next(err))
 }
 
 function _get(req,res,next) {
