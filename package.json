@@ -11,12 +11,14 @@
   "license": "MIT",
   "dependencies": {
     "consign": "^0.1.6",
+    "email-validator": "^2.0.4",
     "express": "^4.16.3",
     "joi": "^13.2.0",
     "lodash": "^4.17.10",
-    "mongoose": "^5.0.17",
+    "mongoose": "^5.2.9",
     "morgan": "^1.9.0",
     "node-cnpj": "^1.0.8",
+    "node-correios": "^2.1.1",
     "node-cpf": "^1.0.20"
   }
 }

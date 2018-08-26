@@ -3,7 +3,7 @@ const Joi = require('joi')
 
 
 
-const Student = mongoose.model('Student',mongoose.Schema({
+const Student = mongoose.model('Student',new mongoose.Schema({
     name:{
         type: String,
         min:3,

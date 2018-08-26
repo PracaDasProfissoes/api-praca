@@ -3,6 +3,13 @@ const consign = require('consign')
 const mongoose = require('mongoose')
 const logger = require('morgan')
 
+var correios = require('node-correios'),
+    correios = new correios();
+
+correios.consultaCEP({cep:'58419270'},function(err,res){
+    console.log(res)
+});
+
 mongoose.connect('mongodb://localhost/praca')
     .then(() => { console.log('Connected on database praca...') })
     .catch((err) => { console.log('Connection failed') })
