@@ -1,40 +1,21 @@
-const express = require('express')
-const consign = require('consign')
-const mongoose = require('mongoose')
-const logger = require('morgan')
+const express = require('express');
+const consign = require('consign');
+const debug = require('debug')('app:startup');
 
-var correios = require('node-correios'),
-    correios = new correios();
+const app = express();
 
-correios.consultaCEP({cep:'58419270'},function(err,res){
-    console.log(res)
+require('./startup/mongo')();
+require('./startup/logger')(app);
+require('./startup/parser')(app);
+
+consign({ verbose: false })
+  .include('controllers')
+  .then('routes')
+  .into(app);
+
+require('./startup/error')(app);
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  debug(`Server listen on port ${port}...`);
 });
-
-mongoose.connect('mongodb://localhost/praca')
-    .then(() => { console.log('Connected on database praca...') })
-    .catch((err) => { console.log('Connection failed') })
-
-const app = express()
-
-app.use(logger('dev'))
-
-app.use(express.json())
-
-consign()
-    .include('controllers')
-    .then('routes')
-    .into(app)
-
-app.use((req, res, next) => {
-    const err = new Error('Resource not found')
-    err.status = 404
-    next(err)
-})
-
-app.use((err, req, res, next) => {
-    const status = err.status || 500
-    res.status(status).send({ message: err.message })
-})
-
-const port = process.env.PORT || 3000
-app.listen(port, () => { console.log(`Server listen on port ${port}...`) })
