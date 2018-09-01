@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pretest": "eslint --ignore-path .gitignore ."
+    "pretest": "eslint --ignore-path .gitignore .",
+    "start": "node index.js",
+    "dev": "DEBUG=app:* node index.js"
   },
   "keywords": [],
   "author": "",
