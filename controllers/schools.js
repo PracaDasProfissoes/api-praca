@@ -1,4 +1,4 @@
-const { School, validateSchool } = require('../models/school');
+const School = require('../models/school');
 const _ = require('lodash');
 
 function _list (req, res, next) {
@@ -16,13 +16,7 @@ function _get (req, res, next) {
 }
 
 function _create (req, res, next) {
-  const { error } = validateSchool(req.body);
-
-  if (error) {
-    return res.status(400).send(error.details[ 0 ].message);
-  }
-
-  const school = new School(_.pick(req.body, [ 'name', 'initials', 'cnpj' ]));
+  const school = new School(_.pick(req.body, [ 'name', 'initials', 'cnpj', 'address', 'director', 'president' ]));
 
   school.save()
     .then(() => {

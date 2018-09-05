@@ -1,3 +1,5 @@
+![](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)
+
 # api-praca
 Api do sistema da Praça das Profissões
 
