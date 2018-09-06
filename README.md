@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.com/PracaDasProfissoes/praca-api.svg?branch=master)](https://travis-ci.com/PracaDasProfissoes/praca-api)
+[![Build Status](https://travis-ci.com/PracaDasProfissoes/praca-api.svg?branch=master)](https://travis-ci.com/PracaDasProfissoes/praca-api)
 
 
 # api-praca
