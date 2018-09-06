@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 const consign = require('consign');
 const debug = require('debug')('app:startup');
 
