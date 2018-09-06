@@ -1,4 +1,5 @@
-![](https://travis-ci.org/travis-ci/travis-web.svg?branch=master)
+![Build Status](https://travis-ci.com/PracaDasProfissoes/praca-api.svg?branch=master)](https://travis-ci.com/PracaDasProfissoes/praca-api)
+
 
 # api-praca
 Api do sistema da Praça das Profissões
