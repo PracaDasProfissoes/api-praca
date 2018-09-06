@@ -30,7 +30,7 @@ const states = [
   'TO'
 ];
 
-const addressSchema = mongoose.Schema({
+const locationSchema = mongoose.Schema({
   'state': {
     type: String,
     required: true,
@@ -48,16 +48,16 @@ const addressSchema = mongoose.Schema({
     minlength: 3,
     maxlength: 100
   },
-  'endereco': {
+  'address': {
     type: String,
     required: true,
     minlength: 3,
-    maxlength: 200
+    maxlength: 100
   },
   'number': {
     type: String,
     required: true,
-    match: /\d+|s\/n/i
+    match: /^\d+$|^s\/n$/i
   },
   'cep': {
     type: String,
@@ -67,4 +67,4 @@ const addressSchema = mongoose.Schema({
   }
 });
 
-module.exports = addressSchema;
+module.exports = locationSchema;

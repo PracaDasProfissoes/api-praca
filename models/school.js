@@ -1,43 +1,60 @@
 const personSchema = require('./person');
-const addressSchema = require('./address');
+const locationSchema = require('./location');
 const mongoose = require('mongoose');
 const cnpjValidator = require('node-cnpj');
+const emailValidator = require('email-validator');
+const uniqueValidator = require('mongoose-unique-validator');
 
-const School = mongoose.model('School', new mongoose.Schema({
+const schoolSchema = new mongoose.Schema({
   'name': {
     type: String,
     required: true,
+    trim: true,
     minlength: 5,
-    maxlength: 100,
-    trim: true
+    maxlength: 100
+  },
+  'type': {
+    type: String,
+    required: true,
+    enum: ['public', 'private']
   },
   'initials': {
     type: String,
     required: true,
-    maxlength: 20,
-    trim: true
+    trim: true,
+    maxlength: 15
   },
   'cnpj': {
     type: String,
     required: true,
+    unique: true,
     trim: true,
     validate: {
       validator: v => v && cnpjValidator.validate(v),
-      message: "'cnpj' is not valid"
+      message: "invalid 'cnpj'"
     }
+  },
+  'email': {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    validate: {
+      validator: v => v && emailValidator.validate(v),
+      message: "invalid 'email'"
+    }
+  },
+  'password': {
+    type: String,
+    required: true
   },
   'telephone': {
     type: String,
     required: true,
     trim: true
   },
-  'email': {
-    type: String,
-    required: true,
-    trim: true
-  },
-  'address': {
-    type: addressSchema,
+  'location': {
+    type: locationSchema,
     required: true
   },
   'director': {
@@ -46,8 +63,14 @@ const School = mongoose.model('School', new mongoose.Schema({
   },
   'president': {
     type: personSchema.schema,
-    required: true
+    required: function () {
+      return this.type === 'public';
+    }
   }
-}));
+});
+
+schoolSchema.plugin(uniqueValidator);
+
+const School = mongoose.model('School', schoolSchema);
 
 module.exports = School;

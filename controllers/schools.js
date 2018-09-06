@@ -16,7 +16,12 @@ function _get (req, res, next) {
 }
 
 function _create (req, res, next) {
-  const school = new School(_.pick(req.body, [ 'name', 'initials', 'cnpj', 'address', 'director', 'president' ]));
+  const fields = [
+    'name', 'type', 'initials', 'cnpj', 'email',
+    'password', 'telephone', 'location', 'director', 'president'
+  ];
+
+  const school = new School(_.pick(req.body, fields));
 
   school.save()
     .then(() => {
