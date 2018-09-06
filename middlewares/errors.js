@@ -1,5 +1,3 @@
-const debug = require('debug')('app:error');
-
 module.exports = (app) => {
   app.use((req, res, next) => {
     const err = new Error('Resource not found');
@@ -10,9 +8,5 @@ module.exports = (app) => {
   app.use((err, req, res, next) => {
     const status = err.status || 500;
     res.status(status).send({ 'message': err.message });
-  });
-
-  process.on('uncaughtException', (err) => {
-    debug(err);
   });
 };
