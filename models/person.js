@@ -1,54 +1,41 @@
+const locationSchema = require('./location');
 const mongoose = require('mongoose');
-const Joi = require('joi');
 const cpfValidator = require('node-cpf');
 const emailValidator = require('email-validator');
 
-const Person = mongoose.model('Person', new mongoose.Schema({
+const personSchema = mongoose.model('Person', new mongoose.Schema({
   'name': {
-    'type': String,
-    'min': 3,
-    'max': 100,
-    'required': true
+    type: String,
+    required: true,
+    minlength: 6,
+    maxlength: 100
   },
-  'address': {
-
+  'location': {
+    type: locationSchema,
+    required: true
   },
   'cpf': {
-    'type': String,
-    'min': 11,
-    'max': 12,
-    'required': true
+    type: String,
+    required: true,
+    validate: {
+      validator: v => v && cpfValidator.validate(v),
+      message: "invalid 'cpf'"
+    }
   },
   'rg': {
-    'type': String,
-    'min': 0,
-    'max': 20,
-    'required': true
+    type: String,
+    required: true,
+    minlength: 7,
+    maxlength: 9
   },
   'email': {
-    'type': String,
-    'min': 0,
-    'max': 50
+    type: String,
+    required: true,
+    validate: {
+      validator: v => v && emailValidator.validate(v),
+      message: "invalid 'email'"
+    }
   }
-
 }));
 
-const validatePerson = (person) => {
-  const schema = {
-    'name': Joi.string.min(3).max(100).required(),
-    'cpf': Joi.string.min(11).max(12).required(),
-    'rg': Joi.string.min(0).max(20).required(),
-    'email': Joi.string.min(0).max(50)
-  };
-
-  const validationObj = Joi.validate(person, schema);
-
-  if ((person.cpf && !cpfValidator.validate(person.cpf)) || (person.email && !emailValidator.validate(person.email))) {
-    validationObj.error = { 'details': [ { 'message': 'Person validation failed: cpf is not valid or email is not valid' } ] };
-
-    return validationObj;
-  }
-};
-
-module.exports.Person = Person;
-module.exports.validatePerson = validatePerson;
+module.exports = personSchema;
