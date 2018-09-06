@@ -14,7 +14,15 @@ consign({ verbose: false })
   .then('routes')
   .into(app);
 
-require('./startup/error')(app);
+require('./middlewares/errors')(app);
+
+process.on('uncaughtException', err => {
+  debug(err);
+});
+
+process.on('unhandledRejection', err => {
+  throw err;
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
