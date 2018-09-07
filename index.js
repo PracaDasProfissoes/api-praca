@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 const consign = require('consign');
 const debug = require('debug')('app:startup');
 
@@ -17,7 +18,15 @@ consign({ verbose: false })
   .then('routes')
   .into(app);
 
-require('./startup/error')(app);
+require('./middlewares/errors')(app);
+
+process.on('uncaughtException', err => {
+  debug(err);
+});
+
+process.on('unhandledRejection', err => {
+  throw err;
+});
 
 
 const port = process.env.PORT || 3000;

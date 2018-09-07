@@ -1,52 +1,29 @@
-const { School, validateSchool } = require('../models/school');
-const _ = require('lodash');
+const School = require('../models/school');
 
-function _list (req, res, next) {
-  School.find()
-    .then((schools) => {
-      res.send(schools);
-    })
-    .catch((err) => next(err));
+async function _list (req, res) {
+  const schools = await School.find();
+  res.send(schools);
 }
 
-function _get (req, res, next) {
-  School.findById(req.params.id)
-    .then((school) => res.send(school))
-    .catch((err) => next(err));
+async function _get (req, res) {
+  const school = await School.findById(req.params.id);
+  res.send(school);
 }
 
-function _create (req, res, next) {
-  const { error } = validateSchool(req.body);
-
-  if (error) {
-    return res.status(400).send(error.details[ 0 ].message);
-  }
-
-  const school = new School(_.pick(req.body, [ 'name', 'initials', 'cnpj' ]));
-
-  school.save()
-    .then(() => {
-      res.send(school);
-    })
-    .catch((err) => next(err));
+async function _create (req, res, next) {
+  const school = new School(req.body);
+  await school.save();
+  res.send(school);
 }
 
-function _update (req, res, next) {
-  School.update({ '_id': req.params.id }, { '$set': req.body })
-    .then((school) => {
-      res.send(school);
-    })
-    .catch((err) => {
-      next(err);
-    });
+async function _update (req, res) {
+  const school = await School.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.send(school);
 }
 
-function _remove (req, res, next) {
-  School.findByIdAndRemove(req.params.id)
-    .then((school) => res.send(school))
-    .catch((err) => {
-      next(err);
-    });
+async function _remove (req, res) {
+  const school = await School.findByIdAndRemove(req.params.id);
+  res.send(school);
 }
 
 module.exports = {

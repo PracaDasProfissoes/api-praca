@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pretest": "eslint --ignore-path .gitignore .",
+    "lint": "eslint --ignore-path .gitignore .",
     "start": "node index.js",
     "dev": "DEBUG=app:* node index.js"
   },
@@ -17,9 +17,11 @@
     "debug": "^3.1.0",
     "email-validator": "^2.0.4",
     "express": "^4.16.3",
+    "express-async-errors": "^3.0.0",
     "joi": "^13.2.0",
     "lodash": "^4.17.10",
-    "mongoose": "^5.2.9",
+    "mongoose": "^5.2.13",
+    "mongoose-unique-validator": "^2.0.1",
     "morgan": "^1.9.0",
     "node-cnpj": "^1.0.8",
     "node-correios": "^2.1.1",

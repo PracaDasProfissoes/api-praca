@@ -1,37 +1,76 @@
+const personSchema = require('./person');
+const locationSchema = require('./location');
 const mongoose = require('mongoose');
-const Joi = require('joi');
 const cnpjValidator = require('node-cnpj');
+const emailValidator = require('email-validator');
+const uniqueValidator = require('mongoose-unique-validator');
 
-const School = mongoose.model('School', new mongoose.Schema({
+const schoolSchema = new mongoose.Schema({
   'name': {
-    'type': String,
-    'required': true
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 5,
+    maxlength: 100
+  },
+  'type': {
+    type: String,
+    required: true,
+    enum: ['public', 'private']
   },
   'initials': {
-    'type': String,
-    'required': true
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 15
   },
   'cnpj': {
-    'type': String,
-    'required': true
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    validate: {
+      validator: v => v && cnpjValidator.validate(v),
+      message: "invalid 'cnpj'"
+    }
+  },
+  'email': {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    validate: {
+      validator: v => v && emailValidator.validate(v),
+      message: "invalid 'email'"
+    }
+  },
+  'password': {
+    type: String,
+    required: true
+  },
+  'telephone': {
+    type: String,
+    required: true,
+    trim: true
+  },
+  'location': {
+    type: locationSchema,
+    required: true
+  },
+  'director': {
+    type: personSchema.schema,
+    required: true
+  },
+  'president': {
+    type: personSchema.schema,
+    required: function () {
+      return this.type === 'public';
+    }
   }
-}));
+});
 
-const validateSchool = (school) => {
-  const schema = {
-    'name': Joi.string().min(5).max(100).required(),
-    'initials': Joi.string().max(20).required(),
-    'cnpj': Joi.string().required()
-  };
+schoolSchema.plugin(uniqueValidator);
 
-  const validationObj = Joi.validate(school, schema);
+const School = mongoose.model('School', schoolSchema);
 
-  if (school.cnpj && !cnpjValidator.validate(school.cnpj)) {
-    validationObj.error = { 'details': [ { 'message': "School validation failed: cnpj: 'cnpj' is not valid" } ] };
-  }
-
-  return validationObj;
-};
-
-module.exports.School = School;
-module.exports.validateSchool = validateSchool;
+module.exports = School;
