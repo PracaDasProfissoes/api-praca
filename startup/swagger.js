@@ -8,7 +8,7 @@ module.exports = (app) => {
     //swagger definition
     const swaggerDefinition = {
         info: {
-            title: `Praça das Profissões Swagger API`,
+            title: `Praça das Profissões API`,
             version: '2.0.0',
             description: 'Describes a RESTful API with Swagger'
         },

@@ -24,7 +24,8 @@
     "node-cnpj": "^1.0.8",
     "node-correios": "^2.1.1",
     "node-cpf": "^1.0.20",
-    "swagger-jsdoc": "^3.0.3"
+    "swagger-jsdoc": "^3.0.3",
+    "swagger-ui-express": "^4.0.1"
   },
   "devDependencies": {
     "eslint": "^5.5.0",
