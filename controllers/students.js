@@ -1,52 +1,29 @@
 const { Student, validadeStudent } = require('../models/student');
-const _ = require('lodash');
 
-function _list (req, res, next) {
-  Student.find()
-    .then((students) => {
-      res.send(students);
-    })
-    .catch((err) => next(err));
+async function _list(req, res) {
+  const students = await Student.find();
+  res.send(students)
 }
 
-function _get (req, res, next) {
-  Student.findById(req.params.id)
-    .then((student) => res.send(student))
-    .catch((err) => next(err));
+async function _get (req, res) {
+  const student = await Student.findById(req.params.id);
+  res.send(student);
 }
 
-function _create (req, res, next) {
-  const { error } = validadeStudent(req.body);
-
-  if (error) {
-    return res.status(400).send(error.details[ 0 ].message);
-  }
-
-  const student = new Student(_.pick(req.body, [ 'name', 'age', 'course', 'grade', 'genre' ]));
-
-  student.save()
-    .then(() => {
-      res.send(student);
-    })
-    .catch((err) => next(err));
+async function _create (req, res, next) {
+  const student = new Student(req.body);
+  await student.save();
+  res.send(student);
 }
 
-function _update (req, res, next) {
-  Student.update({ '_id': req.params.ide }, { '$set': req.body })
-    .then((student) => {
-      res.send(student);
-    })
-    .catch((err) => {
-      next(err);
-    });
+async function _update (req, res) {
+  const student = await Student.findOneAndUpdate(req.params.id);
+  res.send(student);
 }
 
-function _remove (req, res, next) {
-  Student.findByIdAndRemove(req.params.id)
-    .then((student) => res.send(student))
-    .catch((err) => {
-      next(err);
-    });
+async function _remove (req, res) {
+  const student = await Student.findByIdAndRemove(req.params.id);
+  res.send(student);
 }
 
 module.exports = {

@@ -1,30 +1,33 @@
 const mongoose = require('mongoose');
-const Joi = require('joi');
+const uniqueValidator = require('mongoose-unique-validator');
 
-const Student = mongoose.model('Student', new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
   'name': {
-    'type': String,
-    'min': 3,
-    'max': 100,
-    'required': true
+    type: String,
+    min: 3,
+    max: 100,
+    required: true
   },
   'age': {
-    'type': Number,
-    'required': true
+    type: Number,
+    required: true
   },
   'course': {
-    'type': String,
-    'required': true
+    type: String,
+    required: true
   },
   'grade': {
-    'type': String,
-    'required': true
+    type: String,
+    required: true
   },
   'genre': {
-    'type': String,
-    'required': true
+    type: String,
+    required: true,
+    enum: ['male','female','not_binary']
   }
-}));
+});
+
+/*
 
 const validateStudent = (student) => {
   const schema = {
@@ -37,6 +40,10 @@ const validateStudent = (student) => {
 
   return Joi.validate(student, schema);
 };
+*/
+
+studentSchema.plugin(uniqueValidator)
+
+const Student = mongoose.model('Student', studentSchema);
 
 module.exports.Student = Student;
-module.exports.validateStudent = validateStudent;
