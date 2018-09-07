@@ -8,6 +8,10 @@ const app = express();
 require('./startup/mongo')();
 require('./startup/logger')(app);
 require('./startup/parser')(app);
+app.use('/', express.static(__dirname + '/../public'));
+app.use('/api-docs', express.static(__dirname + '/api-docs'));
+require('./startup/swagger')(app);
+
 
 consign({ verbose: false })
   .include('controllers')
@@ -24,7 +28,9 @@ process.on('unhandledRejection', err => {
   throw err;
 });
 
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   debug(`Server listen on port ${port}...`);
 });
+
