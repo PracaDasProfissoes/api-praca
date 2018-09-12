@@ -17,3 +17,6 @@ To run the code quality tests:
 
 And to fix some errors found in the lint:
 > npm run lint --fix
+
+To see the documentation
+> http://localhost:3000/api-docs/
