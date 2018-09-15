@@ -12,11 +12,11 @@ module.exports = function (app) {
  *       - application/json
  *     responses:
  *       200:
- *         description: An array of schools  
+ *         description: An array of schools
  */
   app.get('/api/students', studentCrtl.list);
 
-    /**
+  /**
  * @swagger
  * /api/students/{id}:
  *   get:
@@ -131,7 +131,7 @@ module.exports = function (app) {
    */
   app.put('/api/students/:id', studentCrtl.update);
 
-   /**
+  /**
  * @swagger
  * /api/student/{id}:
  *   delete:

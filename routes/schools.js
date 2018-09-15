@@ -1,7 +1,7 @@
 module.exports = function (app) {
   const schoolCtrl = app.controllers.schools;
 
- /**
+  /**
  * @swagger
  * /api/schools:
  *   get:
@@ -12,7 +12,7 @@ module.exports = function (app) {
  *       - application/json
  *     responses:
  *       200:
- *         description: An array of schools  
+ *         description: An array of schools
  */
   app.get('/api/schools', schoolCtrl.list);
 
@@ -35,12 +35,12 @@ module.exports = function (app) {
  *       200:
  *         description: A single school
  *         schema:
- *          
- * 
+ *
+ *
  */
   app.get('/api/schools/:id', schoolCtrl.get);
 
- /**
+  /**
    * @swagger
    * /api/schools:
    *   post:
@@ -81,7 +81,7 @@ module.exports = function (app) {
    *               type: string
    *             telephone:
    *                type: string
-   *             location: 
+   *             location:
    *                type: string
    *            example: {
    *                "name": "Escola",
@@ -149,7 +149,7 @@ module.exports = function (app) {
    *               type: string
    *             telephone:
    *                type: string
-   *             location: 
+   *             location:
    *                type: string
    *            example: {
    *                "name": "Escola",
