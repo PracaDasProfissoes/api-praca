@@ -30,6 +30,6 @@ process.on('unhandledRejection', err => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  debug(`Server listen on port ${port}...`);
-});
+const server = app.listen(port);
+
+module.exports = server;

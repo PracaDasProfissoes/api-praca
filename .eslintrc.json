@@ -3,5 +3,8 @@
     "rules": {
         "semi": ["error", "always"],
         "no-console": "error"
-    }
+    },
+    "env": {
+        "jest": true
+    }    
 }

@@ -15,12 +15,10 @@ const schoolSchema = new mongoose.Schema({
   },
   'type': {
     type: String,
-    required: true,
     enum: ['public', 'private']
   },
   'initials': {
     type: String,
-    required: true,
     trim: true,
     maxlength: 15
   },
@@ -54,18 +52,13 @@ const schoolSchema = new mongoose.Schema({
     trim: true
   },
   'location': {
-    type: locationSchema,
-    required: true
+    type: locationSchema
   },
   'director': {
-    type: personSchema.schema,
-    required: true
+    type: personSchema.schema
   },
   'president': {
-    type: personSchema.schema,
-    required: function () {
-      return this.type === 'public';
-    }
+    type: personSchema.schema
   }
 });
 
