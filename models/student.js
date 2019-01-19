@@ -24,7 +24,15 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['male','female','not_binary']
-  }
+  },
+  'date': {
+    type: String,
+    required: true
+  }/*,
+  'school': {
+    type: School,
+    required: true
+  }*/
 });
 
 /*

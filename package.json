@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ignore-path .gitignore .",
-    "start": "node index.js",
-    "dev": "DEBUG=app:* node index.js"
+    "start": "nodemon index.js",
+    "dev": "DEBUG=app:* nodemon index.js"
   },
   "keywords": [],
   "author": "",

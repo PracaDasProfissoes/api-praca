@@ -12,7 +12,7 @@ const personSchema = mongoose.model('Person', new mongoose.Schema({
   },
   'location': {
     type: locationSchema,
-    required: true
+    required: false
   },
   'cpf': {
     type: String,
@@ -34,6 +34,11 @@ const personSchema = mongoose.model('Person', new mongoose.Schema({
     validate: {
       validator: v => v && emailValidator.validate(v),
       message: "invalid 'email'"
+    },
+    'phone': {
+      type: String,
+      required: true,
+      trim: true
     }
   }
 }));
