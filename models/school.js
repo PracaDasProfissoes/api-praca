@@ -54,8 +54,9 @@ const schoolSchema = new mongoose.Schema({
     trim: true
   },
   'location': {
-    type: locationSchema,
-    required: true
+    type: String,
+    required: true,
+    maxlength: 300
   },
   'director': {
     type: personSchema.schema,

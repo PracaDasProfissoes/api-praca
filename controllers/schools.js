@@ -13,6 +13,7 @@ async function _get (req, res) {
 async function _create (req, res, next) {
   const school = new School(req.body);
   await school.save();
+  
   res.send(school);
 }
 

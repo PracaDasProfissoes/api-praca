@@ -62,7 +62,7 @@ module.exports = function (app) {
    *             - cnpj
    *             - email
    *             - password
-   *             - telephone
+   *             - phone
    *             - location
    *             - director
    *             - president
@@ -79,7 +79,7 @@ module.exports = function (app) {
    *               type: string
    *             password:
    *               type: string
-   *             telephone:
+   *             phone:
    *                type: string
    *             location:
    *                type: string
@@ -90,9 +90,10 @@ module.exports = function (app) {
    *                "cnpj": "68.978.394/0001-90",
    *                "email": "user@user.user",
    *                "password": "user",
-   *                "telephone": "000000000",
+   *                "phone": "000000000",
    *                "location": "Av. 7 de Setembro, Nº 7, Bairro: Centro, Cidade: Açu",
-   *                "president": "AGENT"
+   *                "president": "AGENT",
+   *                "director": ""
    *            }
    *     responses:
    *       200:
@@ -130,7 +131,7 @@ module.exports = function (app) {
    *             - cnpj
    *             - email
    *             - password
-   *             - telephone
+   *             - phone
    *             - location
    *             - director
    *             - president
@@ -147,7 +148,7 @@ module.exports = function (app) {
    *               type: string
    *             password:
    *               type: string
-   *             telephone:
+   *             phone:
    *                type: string
    *             location:
    *                type: string
@@ -158,9 +159,10 @@ module.exports = function (app) {
    *                "cnpj": "68.978.394/0001-90",
    *                "email": "user@user.user",
    *                "password": "user",
-   *                "telephone": "000000000",
+   *                "phone": "000000000",
    *                "location": "Av. 7 de Setembro, Nº 7, Bairro: Centro, Cidade: Açu",
-   *                "president": "AGENT"
+   *                "president": "AGENT",
+   *                "director": ""
    *            }
    *     responses:
    *       200:
